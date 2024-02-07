@@ -10,6 +10,8 @@ source:
   sha256: 90275a0f315eebba857b6a8e5e13d997d3b285c4d9ca1cfbce985f8026c90e8c
 
 build:
+  # skipping py<39 because of missing numpy >=1.24.4
+  skip: True  # [py<39]
   script: {{ PYTHON }} -m pip install . --no-deps --no-build-isolation -vv
   number: 0
 

@@ -22,7 +22,7 @@ requirements:
     - wheel
     - poetry-core
   run:
-    - python >=3.8
+    - python
     - more-itertools >=8.2.0,<9.0.0
     - setuptools >=65.5.1,<66.0.0
     - scipy >=1.8.1,<2.0.0
@@ -44,8 +44,14 @@ test:
 about:
   home: https://github.com/mongodb/signal-processing-algorithms
   summary: Signal Processing Algorithms from MongoDB
+  description: |
+    A suite of algorithms implementing Energy Statistics, E-Divisive with Means and Generalized ESD Test for Outliers
+    in python. See The Use of Change Point Detection to Identify Software Performance Regressions in a Continuous Integration System and Creating a Virtuous Cycle in Performance Testing at MongoDB for background on the development and use of this library.
   license: Apache-2.0
   license_file: LICENSE
+  license_family: Apache
+  doc_url: https://github.com/mongodb/signal-processing-algorithms
+  dev_url: https://github.com/mongodb/signal-processing-algorithms
 
 extra:
   recipe-maintainers:

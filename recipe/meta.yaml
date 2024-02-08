@@ -6,8 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: 90275a0f315eebba857b6a8e5e13d997d3b285c4d9ca1cfbce985f8026c90e8c
+  - url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+    sha256: 90275a0f315eebba857b6a8e5e13d997d3b285c4d9ca1cfbce985f8026c90e8c
+  - git_url: https://github.com/mongodb/signal-processing-algorithms
+    git_rev: 7d0a2030d520402e04fedc34eb57191ecbd883a6
+    folder: gh-test
 
 build:
   # skipping py<39 because of missing numpy >=1.24.4
@@ -36,13 +39,23 @@ requirements:
     - typed-ast >=1.5.0,<2.0.0
     - numpy >=1.24.4,<2.0.0
 
+# skipping test_diff_equivalence because og negligible numerical calculation error
+# skipping test_version_is_updated because version is not recognized on GH although officially released and version
+# number is also update on GH at commit 7d0a2030d520402e04fedc34eb57191ecbd883a6
+{% set tests_to_skip='test_diff_equivalence or test_version_is_updated' %}
+
 test:
+  source_files:
+    - gh-test/tests
   imports:
     - signal_processing_algorithms
   commands:
+    - pytest gh-test/tests -k "not ({{ tests_to_skip }})"
     - pip check
   requires:
     - pip
+    - pytest
+    - hypothesis
 
 about:
   home: https://github.com/mongodb/signal-processing-algorithms

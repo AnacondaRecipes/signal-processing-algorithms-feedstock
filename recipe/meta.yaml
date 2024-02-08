@@ -56,6 +56,7 @@ test:
     - pip
     - pytest
     - hypothesis
+    - setuptools >=65.5.1,<66.0.0
 
 about:
   home: https://github.com/mongodb/signal-processing-algorithms
